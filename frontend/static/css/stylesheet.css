@@ -1,0 +1,14 @@
+.chatbot-response {
+    border-radius: 15px;
+    background-color: rgba(57, 192, 237,.2);
+}
+
+.user-response {
+    border-radius: 15px;
+    background-color: #fbfbfb;
+}
+
+.avatar {
+    width: 45px;
+    height: 100%;
+}
