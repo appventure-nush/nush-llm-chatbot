@@ -9,7 +9,7 @@ pdf_filepath = "pdf_sources/PC3131/"
 # For example: chapter 18 of college physics 2e begins at 791, and ends at 833 (based on the PDF page number, not the
 # page number on the bottom right). Therefore, the range of page numbers would be (791, 833).
 # If None is passed in place of the (start, end) tuple, the entire PDF will be converted to text.
-# The same PDF can be passed in multiple times with different ranges, to retrieve different chapters.
+# The same PDF can be passed in multiple times with different ranges, to retrieve different PC3131.
 pdf_files = [
     # chapter 18 Electric Charge and Electric Field
     ('College_Physics_2e-WEB_7Zesafu.pdf', (791, 833)),
