@@ -1,6 +1,8 @@
 import os
 import openai
-from llama_index import ListIndex, LLMPredictor, ServiceContext, StorageContext
+from llama_index import ListIndex, LLMPredictor, ServiceContext, StorageContext, LangchainEmbedding, \
+    set_global_service_context
+from langchain.embeddings import HuggingFaceEmbeddings
 from langchain import OpenAI
 from llama_index.indices.composability import ComposableGraph
 from langchain.chains.conversation.memory import ConversationBufferMemory
@@ -11,18 +13,22 @@ from llama_index.query_engine.transform_query_engine import TransformQueryEngine
 
 from llamaindex import vector_indices
 
+
 def create_agent_chain(module="PC3131"):
     """
 
     :param module: filename of the specific module under modules
     :return: creates agent with retrieval knowledge of specified module
     """
+
     package_dir = os.path.dirname(os.path.abspath(__file__))
 
     index_set = vector_indices.load_indices()
     with open(os.path.join(package_dir, "apikey"), "r") as f:
         API_KEY = f.read().strip()
     openai.api_key = API_KEY
+    # sometimes env bugs out and complains the api_key is not set, so setting it as environment variable just to be safe
+    os.environ["OPENAI_API_KEY"] = API_KEY
 
     # describe each index to help traversal of composed graph
     index_summaries = [f"Notes for {chapter}" for chapter in os.listdir(os.path.join(package_dir,
@@ -30,8 +36,13 @@ def create_agent_chain(module="PC3131"):
 
     # define an LLMPredictor set number of output tokens
     llm_predictor = LLMPredictor(llm=OpenAI(temperature=0, max_tokens=512, openai_api_key=API_KEY))
-    service_context = ServiceContext.from_defaults(llm_predictor=llm_predictor)
+    # by default, LlamaIndex uses OpenAI's embedding, we will use HuggingFace's embedding instead since that is free
+    embed_model = LangchainEmbedding(HuggingFaceEmbeddings())
+
+    service_context = ServiceContext.from_defaults(chunk_size=512, llm_predictor=llm_predictor, embed_model=embed_model)
     storage_context = StorageContext.from_defaults()
+
+    set_global_service_context(service_context)
 
     # define a list index over the vector indices
     # allows us to synthesize information across each index
@@ -71,7 +82,7 @@ def create_agent_chain(module="PC3131"):
         query_engine=graph_query_engine,
         name=f"Graph Index",
         description=f"useful for when you want to answer queries that require analyzing multiple chapters of {module}.",
-        tool_kwargs={"return_direct": True}
+        tool_kwargs={"return_direct": True},
     )
 
     # define toolkit
@@ -84,7 +95,7 @@ def create_agent_chain(module="PC3131"):
             query_engine=query_engine,
             name=f"Vector Index {chapter}",
             description=f"useful for when you want to answer queries about {chapter}",
-            tool_kwargs={"return_direct": True}
+            tool_kwargs={"return_direct": True},
         )
         index_configs.append(tool_config)
 
@@ -93,7 +104,7 @@ def create_agent_chain(module="PC3131"):
     )
 
     memory = ConversationBufferMemory(memory_key="chat_history")
-    llm=OpenAI(temperature=0, openai_api_key=API_KEY)
+    llm = OpenAI(temperature=0, openai_api_key=API_KEY)
     agent_chain = create_llama_chat_agent(
         toolkit,
         llm,
@@ -101,6 +112,7 @@ def create_agent_chain(module="PC3131"):
         verbose=True
     )
     return agent_chain
+
 
 if __name__ == "__main__":
     agent_chain = create_agent_chain()
