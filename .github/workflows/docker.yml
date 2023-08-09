@@ -10,13 +10,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: create apikey
-        env:
-          APIKEY: ${{secrets.APIKEY}}
-        run: |
-          cd llamaindex
-          touch apikey
-          echo "$APIKEY" >> apikey
+      # - name: create apikey
+      #   env:
+      #     APIKEY: ${{secrets.APIKEY}}
+      #   run: |
+      #     cd llamaindex
+      #     touch apikey
+      #     echo "$APIKEY" >> apikey
       - name: Push image to AppVenture registry
         uses: docker/build-push-action@v1
         with:
