@@ -13,7 +13,7 @@ jobs:
         env:
           APIKEY: ${{secrets.APIKEY}}
         run: |
-          touch llamaindex/apikey
+          touch ./llamaindex/apikey
           echo "$APIKEY" >> llamaindex/apikey
       - uses: actions/checkout@v2
       - name: Push image to AppVenture registry
