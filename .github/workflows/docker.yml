@@ -13,7 +13,7 @@ jobs:
         env:
           APIKEY: ${{secrets.APIKEY}}
         run: |
-          cd llamaindex
+          cd nush-llm-chatbot/llamaindex
           touch apikey
           echo "$APIKEY" >> apikey
       - uses: actions/checkout@v2
