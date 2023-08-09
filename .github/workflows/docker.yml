@@ -1,0 +1,26 @@
+name: Docker CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: create apikey
+        env:
+          APIKEY: ${{secrets.APIKEY}}
+        run: |
+          touch llamaindex/apikey
+          echo "$APIKEY" >> llamaindex/apikey
+      - uses: actions/checkout@v2
+      - name: Push image to AppVenture registry
+        uses: docker/build-push-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          registry: registry.nush.app
+          repository: nush-llm-chatbot
+          tags: latest

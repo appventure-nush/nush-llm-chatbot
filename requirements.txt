@@ -7,20 +7,20 @@ async-timeout==4.0.2
 attrs==23.1.0
 backcall==0.2.0
 beautifulsoup4==4.12.2
-blinker @ file:///home/conda/feedstock_root/build_artifacts/blinker_1681349778161/work
+blinker
 cachetools==5.3.1
 certifi==2023.5.7
 cffi==1.15.1
 charset-normalizer==3.1.0
-click @ file:///D:/bld/click_1666798499870/work
-colorama @ file:///home/conda/feedstock_root/build_artifacts/colorama_1666700638685/work
+click
+colorama
 cryptography==41.0.1
 dataclasses-json==0.5.7
 decorator==5.1.1
 distro==1.8.0
 executing==1.2.0
 filelock==3.12.2
-Flask @ file:///home/conda/feedstock_root/build_artifacts/flask_1682966527207/work
+Flask
 flatbuffers==23.5.26
 frozenlist==1.3.3
 fsspec==2023.5.0
@@ -34,12 +34,12 @@ h5py==3.8.0
 huggingface-hub==0.16.4
 idna==3.4
 imageio==2.31.0
-importlib-metadata @ file:///home/conda/feedstock_root/build_artifacts/importlib-metadata_1682176699712/work
+importlib-metadata
 ipython==8.14.0
-itsdangerous @ file:///home/conda/feedstock_root/build_artifacts/itsdangerous_1648147185463/work
+itsdangerous
 jax==0.4.11
 jedi==0.18.2
-Jinja2 @ file:///home/conda/feedstock_root/build_artifacts/jinja2_1654302431367/work
+Jinja2
 joblib==1.3.1
 keras==2.12.0
 langchain==0.0.234
@@ -48,7 +48,7 @@ lazy_loader==0.2
 libclang==16.0.0
 llama-index==0.7.9
 Markdown==3.4.3
-MarkupSafe @ file:///D:/bld/markupsafe_1685769253528/work
+MarkupSafe
 marshmallow==3.19.0
 marshmallow-enum==1.5.1
 matplotlib-inline==0.1.6
@@ -98,7 +98,7 @@ selectivesearch==0.4
 sentence-transformers==2.2.2
 sentencepiece==0.1.99
 six==1.16.0
-sklearn==0.0.post5
+scikit-learn
 soupsieve==2.4.1
 SQLAlchemy==2.0.15
 stack-data==0.6.2
@@ -109,7 +109,7 @@ tensorboard==2.12.3
 tensorboard-data-server==0.7.0
 tensorflow==2.12.0
 tensorflow-estimator==2.12.0
-tensorflow-intel==2.12.0
+tensorflow-intel
 tensorflow-io-gcs-filesystem==0.31.0
 termcolor==2.3.0
 threadpoolctl==3.2.0
@@ -130,4 +130,4 @@ wcwidth==0.2.6
 Werkzeug==2.3.4
 wrapt==1.14.1
 yarl==1.9.2
-zipp @ file:///home/conda/feedstock_root/build_artifacts/zipp_1677313463193/work
+zipp
