@@ -33,7 +33,7 @@ $(document).ready(function() {
                     if (data.hasOwnProperty('response')) {
                         $('#chatlogs').append(`
                             <div class="d-flex flex-row justify-content-start mb-4" >
-                                <img src=${yuen_src} width="85" height="85"></img>
+                                <img src=${chatbot_src} width="85" height="85"></img>
                                 <div class="p-3 ms-3 chatbot-response">
                                     <p class="small mb-0">
                                     ${data['response']}
